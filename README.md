@@ -2,7 +2,7 @@
 
 Welcome to my collection of web design experiments and examples! 🎨✨
 
-This repository is a playground for exploring creative ideas, testing design concepts, and showcasing small projects. It's a mix of simple experiments, reusable components, and fun challenges that I've worked on.
+This repository is a playground for exploring ideas, testing design concepts, and showcasing small projects. It's a mix of simple experiments, reusable components, and fun challenges that I've worked on.
 
 ## 🌟 What You'll Find Here
 
@@ -15,7 +15,7 @@ This repository is a playground for exploring creative ideas, testing design con
 ## 🛠️ Tools & Technologies
 
 - **HTML5**
-- **CSS3**
+- **CSS**
 - **JavaScript**
 - **Bootstrap**
 - **FontAwesome**
