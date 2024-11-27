@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Order History</title>
+  <link rel="icon" image="type/png" href="/assets/images/hungerRush.png" type="image/x-icon">
+
+  <!-- <link rel="stylesheet" href="css/styles.css">-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+</head>
+
+<body>
+  <!--Start of Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/views/talkTracks/talkTrack.html">OrderAI</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse navbar-items" id="navbarNavDropdown">
+      <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav dropdown-toggle">
+          <li class="nav-item dropdown">
+            <a href="#" id="menu" data-bs-toggle="dropdown" class="nav-link dropdown-toggle">
+              Reports
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="/views/oaiDemo/orderHistory.html">Order History</a></li>
+              <li><a class="dropdown-item" href="/views/oaiDemo/summaryReport.html"> Order Summary Report</a></li>
+          </ul>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/views/oaiDemo/search.html">Search</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Store
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/views/oaiDemo/manageStore.html">Manage Store</a>
+            <a class="dropdown-item" href="/views/oaiDemo/healthDashboard.html">Store Health</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/views/oaiDemo/myProfile.html">My Account</a>
+        </li>
+      </ul>
+      </ul>
+      <div>
+        <ul class=" navbar-nav mr-auto">
+          <form class="form-inline my-2 my-lg-0">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+              </div>
+              <input class="form-control" type="search" placeholder="Customer #" aria-label="Search">
+            </div>
+            <button class="btn btn-dark text-white mr-3" type="button" onclick="openSearchPage()">Search</button>
+          </form>
+          <li class="nav-item">
+            <a class="nav-link" href="/views/oaiDemo/myProfile.html"> <i class="fas fa-user mr-2"></i>Order AI User</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/views/talkTracks/talkTrack.html"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!--End of Navbar-->
+
+  <!--Page Title-->
+  <div class="container-fluid"
+    style="text-align: center; text-transform: uppercase; font-family: Arial, Helvetica, sans-serif; font-size: large;">
+    Order History
+  </div>
+  <!--End of Page Title-->
+  <hr style="background-color: lightgray;">
+  <!--Start of SearchContainer-->
+  <div class="container" style="font-family: Arial, Helvetica, sans-serif;">
+    <br>
+    <div class="row">
+      <!-- First Form -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <select class="form-control">
+            <option label="Select Store" disabled selected value=""></option>
+            <option value="1">All</option>
+            <option value="2">Bitebuddy Eats</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <div style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: 14px;"><b>From:</b></div>
+          <input type="date" class="form-control" id="fromDate1">
+        </div>
+      </div>
+
+      <!-- Second Form -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <select class="form-control">
+            <option label="Select Search Method" disabled selected value=""></option>
+            <option value="1">Search By Store Code</option>
+            <option value="2">Search By Store</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <div style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: 14px;"><b>To:</b></div>
+          <input type="date" class="form-control" id="toDate2">
+        </div>
+      </div>
+    </div>
+    <!--Row of 3 forms - pulled out of row for alignment-->
+    <div class="form-group mb-3">
+      <select class="form-control mr-3">
+        <option label="Order Type" disabled selected value=""></option>
+        <option value="1">ALL</option>
+        <option value="2">Pro Order</option>
+        <option value="3">Text Order</option>
+        <option value="4">Telephone Order</option>
+      </select>
+      <select class="form-control mr-3">
+        <option label="Payment Option" disabled selected value=""></option>
+        <option value="1">ALL</option>
+        <option value="1">Credit Card</option>
+        <option value="2">Cash</option>
+      </select>
+      <select class="form-control">
+        <option label="Delivery/Pickup Method" disabled selected value=""></option>
+        <option value="1">ALL</option>
+        <option value="2">Delivery</option>
+        <option value="3">Pick Up</option>
+      </select>
+    </div>
+    <!--Search button-->
+    <div class="col-md align-content-center text-center">
+      <button type="button" class="btn btn-primary mr-2" id="searchButton" role="button" onclick="toggleTableDisplay()"
+        title="This button toggles the report displays below">Search</button>
+        <button type="button" class="btn btn-primary ml-2" id="searchButton" role="button" onclick="toggleTableDisplay()"
+        title="This button toggles the report displays below">Reset</button>
+    </div>
+  </div>
+  <!-- End of Search Container-->
+  <hr style="background-color: lightgray;">
+  <br>
+
+  <!--Start of Table Container-->
+  <div id="tableSummaryReports" class="tableSummaryReports" style="display: none;">
+    <div class="container-fluid pb-5" id="tableBox">
+      <div class="container-fluid">
+        <p class="report-title" style="font-family: Arial, Helvetica, sans-serif; letter-spacing: 1px;">
+          <b>SUMMARY REPORT</b>
+          <button type="button" class="btn btn-outline-success btn-sm">Save as PDF</button>
+        </p>
+        <div class="table-responsive" id="tableDisplay">
+          <table class="table table-bordered">
+            <tr>
+              <th>ORDERS</th>
+              <th>PICKUP</th>
+              <th>DELIVERY</th>
+              <th>CASH PAYMENT</th>
+              <th>CARD PAYMENT</th>
+              <th>SUBTOTAL ($)</th>
+              <th>TAX ($)</th>
+              <th>DEL FEE ($)</th>
+              <th>SERVICE FEE ($)</th>
+              <th>TOTAL DUE ($)</th>
+              <th>TIP ($)</th>
+              <th>REFUND ($)</th>
+              <th>TOTAL CHARGE ($)</th>
+              <th>PROCESSING FEE ($)</th>
+              <th>TEXT FEE ($)</th>
+            </tr>
+            </thead>
+            <tbody style="background-color: #f9f9f9;">
+              <tr>
+                <td>485</td>
+                <td>423</td>
+                <td>62</td>
+                <td>296</td>
+                <td>189</td>
+                <td>14357.42</td>
+                <td>1144.21</td>
+                <td>309.38</td>
+                <td>0.00</td>
+                <td>15811.01</td>
+                <td>483.15</td>
+                <td>0.00</td>
+                <td>16294.16</td>
+                <td>264.13</td>
+                <td>80.95</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br>
+    </div>
+    <br>
+    <div class="container-fluid pb-5" id="tableBox">
+      <p class="report-title" style="font-family: Arial, Helvetica, sans-serif; letter-spacing: 1px;">
+        <b>ORDER DETAILS</b>
+        <button type="button" class="btn btn-outline-success btn-sm ml-3">Export to Excel</button>
+      </p>
+      <div class="table-responsive" id="tableDisplay">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>DATE</th>
+              <th>CUSTOMER PHONE</th>
+              <th>TIME</th>
+              <th>ORDER DETAIL</th>
+              <th>PAYMENT</th>
+              <th>DEL/PU</th>
+              <th>POSID</th>
+              <th>TID</th>
+              <th>ORDER TYPE</th>
+              <th>DISCOUNT</th>
+              <th>SUBTOTAL</th>
+              <th>TAX</th>
+              <th>DEL FEE</th>
+              <th>SERVICE FEE</th>
+              <th>TOTAL DUE</th>
+              <th>TIP</th>
+              <th>REFUND</th>
+              <th>TOTAL CHARGE</th>
+              <th>PROCESSING FEE</th>
+              <th>TEXT FEES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(991) 286-6611</td>
+              <td>19:23 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">4GMK6J</a></td>
+              <td>IN-STORE</td>
+              <td>DELIVERY</td>
+              <td>6</td>
+              <td>T106</td>
+              <td>TEL-ORDER</td>
+              <td>3.09</td>
+              <td>62.57</td>
+              <td>3.13</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>65.7</td>
+              <td>4.45</td>
+              <td>0.00</td>
+              <td>70.15</td>
+              <td>2.37</td>
+              <td>0.0</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(344) 701-9070</td>
+              <td>16:48 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">5ACQYC</a></td>
+              <td>IN-STORE</td>
+              <td>PICK UP</td>
+              <td>94</td>
+              <td>T106</td>
+              <td>TEXT-ORDER</td>
+              <td>1.55</td>
+              <td>51.21</td>
+              <td>2.56</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>53.77</td>
+              <td>3.1</td>
+              <td>0.00</td>
+              <td>56.87</td>
+              <td>0.54</td>
+              <td>0.35</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(345) 742-8387</td>
+              <td>15:11 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">9W1O18</a></td>
+              <td>PRE-PAID</td>
+              <td>DELIVERY</td>
+              <td>17</td>
+              <td>T102</td>
+              <td>TEL-ORDER</td>
+              <td>2.51</td>
+              <td>58.13</td>
+              <td>2.91</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>61.04</td>
+              <td>4.51</td>
+              <td>0.00</td>
+              <td>65.55</td>
+              <td>2.25</td>
+              <td>0.0</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(324) 356-9451</td>
+              <td>22:43 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">5NCYOY</a></td>
+              <td>IN-STORE</td>
+              <td>PICK UP</td>
+              <td>42</td>
+              <td>T101</td>
+              <td>TEXT-ORDER</td>
+              <td>3.99</td>
+              <td>58.79</td>
+              <td>2.94</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>61.73</td>
+              <td>4.46</td>
+              <td>0.00</td>
+              <td>66.19</td>
+              <td>0.09</td>
+              <td>0.35</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(773) 674-8477</td>
+              <td>11:00 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">PKO6VH</a></td>
+              <td>IN-STORE</td>
+              <td>DELIVERY</td>
+              <td>4</td>
+              <td>T108</td>
+              <td>TEXT-ORDER</td>
+              <td>2.14</td>
+              <td>64.53</td>
+              <td>3.23</td>
+              <td>4.99</td>
+              <td>0.00</td>
+              <td>72.75</td>
+              <td>4.75</td>
+              <td>0.00</td>
+              <td>77.5</td>
+              <td>0.55</td>
+              <td>0.0</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(109) 957-2090</td>
+              <td>15:41 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">MLN088</a></td>
+              <td>PRE-PAID</td>
+              <td>DELIVERY</td>
+              <td>5</td>
+              <td>T110</td>
+              <td>TEL-ORDER</td>
+              <td>5.33</td>
+              <td>71.38</td>
+              <td>3.57</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>74.95</td>
+              <td>5.43</td>
+              <td>0.00</td>
+              <td>80.38</td>
+              <td>2.58</td>
+              <td>0.0</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(352) 497-1284</td>
+              <td>18:29 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">SB0BKL</a></td>
+              <td>IN-STORE</td>
+              <td>DELIVERY</td>
+              <td>4</td>
+              <td>T102</td>
+              <td>TEXT-ORDER</td>
+              <td>6.59</td>
+              <td>47.54</td>
+              <td>2.38</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>49.92</td>
+              <td>4.47</td>
+              <td>0.00</td>
+              <td>54.39</td>
+              <td>1.46</td>
+              <td>0.35</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(112) 573-6882</td>
+              <td>19:47 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">WBEMPB</a></td>
+              <td>IN-STORE</td>
+              <td>DELIVERY</td>
+              <td>84</td>
+              <td>T110</td>
+              <td>TEL-ORDER</td>
+              <td>4.94</td>
+              <td>47.0</td>
+              <td>2.35</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>49.35</td>
+              <td>2.4</td>
+              <td>0.00</td>
+              <td>51.75</td>
+              <td>0.32</td>
+              <td>0.0</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(243) 730-3939</td>
+              <td>15:45 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">9WLXYN</a></td>
+              <td>IN-STORE</td>
+              <td>PICK UP</td>
+              <td>96</td>
+              <td>T110</td>
+              <td>TEXT-ORDER</td>
+              <td>1.47</td>
+              <td>70.94</td>
+              <td>3.55</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>74.49</td>
+              <td>6.33</td>
+              <td>0.00</td>
+              <td>80.82</td>
+              <td>1.5</td>
+              <td>0.0</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(701) 189-2538</td>
+              <td>14:48 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">ER9YPV</a></td>
+              <td>IN-STORE</td>
+              <td>PICK UP</td>
+              <td>80</td>
+              <td>T101</td>
+              <td>TEXT-ORDER</td>
+              <td>2.41</td>
+              <td>14.18</td>
+              <td>0.71</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>14.89</td>
+              <td>1.35</td>
+              <td>0.00</td>
+              <td>16.24</td>
+              <td>2.09</td>
+              <td>0.0</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(202) 389-1085</td>
+              <td>18:55 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">DEHDG0</a></td>
+              <td>IN-STORE</td>
+              <td>DELIVERY</td>
+              <td>88</td>
+              <td>T109</td>
+              <td>TEL-ORDER</td>
+              <td>3.66</td>
+              <td>38.38</td>
+              <td>1.92</td>
+              <td>4.99</td>
+              <td>0.00</td>
+              <td>45.29</td>
+              <td>2.24</td>
+              <td>0.00</td>
+              <td>47.53</td>
+              <td>0.64</td>
+              <td>0.35</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(565) 236-2724</td>
+              <td>17:18 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">Y8D9HR</a></td>
+              <td>IN-STORE</td>
+              <td>DELIVERY</td>
+              <td>23</td>
+              <td>T108</td>
+              <td>TEL-ORDER</td>
+              <td>2.87</td>
+              <td>50.98</td>
+              <td>2.55</td>
+              <td>4.99</td>
+              <td>0.00</td>
+              <td>58.52</td>
+              <td>3.93</td>
+              <td>0.00</td>
+              <td>62.45</td>
+              <td>2.72</td>
+              <td>0.0</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(965) 863-6281</td>
+              <td>17:35 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">NPR2IG</a></td>
+              <td>PRE-PAID</td>
+              <td>DELIVERY</td>
+              <td>24</td>
+              <td>T102</td>
+              <td>TEXT-ORDER</td>
+              <td>6.41</td>
+              <td>25.91</td>
+              <td>1.3</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>27.21</td>
+              <td>1.56</td>
+              <td>0.00</td>
+              <td>28.77</td>
+              <td>2.04</td>
+              <td>0.35</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(728) 743-5381</td>
+              <td>14:24 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">BN0UV5</a></td>
+              <td>PRE-PAID</td>
+              <td>DELIVERY</td>
+              <td>10</td>
+              <td>T103</td>
+              <td>TEL-ORDER</td>
+              <td>3.16</td>
+              <td>34.0</td>
+              <td>1.7</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>35.7</td>
+              <td>2.74</td>
+              <td>0.00</td>
+              <td>38.44</td>
+              <td>0.98</td>
+              <td>0.35</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(455) 736-4619</td>
+              <td>20:05 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">3S6WCL</a></td>
+              <td>PRE-PAID</td>
+              <td>DELIVERY</td>
+              <td>90</td>
+              <td>T103</td>
+              <td>TEXT-ORDER</td>
+              <td>6.2</td>
+              <td>0.59</td>
+              <td>0.03</td>
+              <td>4.99</td>
+              <td>0.00</td>
+              <td>5.61</td>
+              <td>0.04</td>
+              <td>0.00</td>
+              <td>5.65</td>
+              <td>0.72</td>
+              <td>0.35</td>
+            </tr>
+
+            <tr>
+              <td>2023-10-12</td>
+              <td>(464) 294-3460</td>
+              <td>20:29 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">KCMP9R</a></td>
+              <td>PRE-PAID</td>
+              <td>PICK UP</td>
+              <td>23</td>
+              <td>T103</td>
+              <td>TEXT-ORDER</td>
+              <td>1.85</td>
+              <td>32.66</td>
+              <td>1.63</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>34.29</td>
+              <td>1.64</td>
+              <td>0.00</td>
+              <td>35.93</td>
+              <td>2.77</td>
+              <td>0.35</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(813) 501-1282</td>
+              <td>18:52 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">5CNMSX</a></td>
+              <td>IN-STORE</td>
+              <td>PICK UP</td>
+              <td>8</td>
+              <td>T102</td>
+              <td>TEL-ORDER</td>
+              <td>6.42</td>
+              <td>0.11</td>
+              <td>0.01</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>0.12</td>
+              <td>0.01</td>
+              <td>0.00</td>
+              <td>0.13</td>
+              <td>2.97</td>
+              <td>0.0</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(745) 266-7195</td>
+              <td>14:35 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">SW6QF8</a></td>
+              <td>IN-STORE</td>
+              <td>PICK UP</td>
+              <td>75</td>
+              <td>T109</td>
+              <td>TEXT-ORDER</td>
+              <td>5.6</td>
+              <td>37.85</td>
+              <td>1.89</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>39.74</td>
+              <td>2.26</td>
+              <td>0.00</td>
+              <td>42.0</td>
+              <td>1.26</td>
+              <td>0.35</td>
+            </tr>
+
+            <tr>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td>(302) 371-1518</td>
+              <td>16:19 PM</td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">K8PC24</a></td>
+              <td>PRE-PAID</td>
+              <td>DELIVERY</td>
+              <td>76</td>
+              <td>T105</td>
+              <td>TEXT-ORDER</td>
+              <td>0.92</td>
+              <td>54.06</td>
+              <td>2.7</td>
+              <td>0.0</td>
+              <td>0.00</td>
+              <td>56.76</td>
+              <td>4.81</td>
+              <td>0.00</td>
+              <td>61.57</td>
+              <td>1.2</td>
+              <td>0.0</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+  </div> <!--End of Table Container-->
+
+
+  <!-- The Modal for Text Orders -->
+  <div class="modal" id="textModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header text-center" style="background-color: lightgray;">
+          <h3 class="modal-title w-100">OrderAI Text & Call</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body shadow">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <div class="row pt-3">
+                  <div class="col-8 col-sm-6">
+                    <img src="/assets/images/oaiTxtMsg.jpg" alt="oaiTxtMsg" class="img-fluid">
+                  </div>
+                  <div class="col-8 col-sm-6 text-left border h-50 modalBodyRight mx-auto mt-5">
+                    <div>
+                      <h3 style="text-align: center;">Order Details</h3>
+                    </div>
+                    <br>
+                    <p><b>Customer No:</b> (832)-303-3345</p>
+                    <p><b>Restaurant No:</b> (832)-303-3345</p>
+                    <p><b>Order ID:</b> 4GMK6J</p>
+                    <p><b>Delivery Method:</b> Pick Up</p>
+                    <p><b>Toast ID:</b> 15</p>
+                    <p><b>Toast ETA:</b> 30 Min.</p>
+                    <p><b>Savings:</b> $3.09</p>
+                    <p><b>Total:</b> $70.15</p>
+                    <p><b>Tip:</b> $4.45</p>
+                    <br>
+                    <p>
+                    <h3 style="text-align: center;">Call Recording</h3>
+                    <audio controls style="display: block; margin: auto;">
+                      <source src="/assets/audio/HH_Upsell.mp3" type="audio/mpeg">
+                      Your browser does not support the audio element.
+                    </audio>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Modal for Audio Orders  -->
+  <div class="modal" id="textModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          Audio file goes here
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer Code Use on every page  style="border-top: 1px solid lightgray; background: white;-->
+  <footer id="footer" class="footer">
+    <div class="footer-left">
+      <p class="footer-text">© 2023 OrderAI. All rights reserved.</p>
+    </div>
+    <div class="footer-right">
+      <p class="footer-text">Terms of Service | Privacy Policy | Cookie Policy</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!--The main.js file must load last-->
+  <script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

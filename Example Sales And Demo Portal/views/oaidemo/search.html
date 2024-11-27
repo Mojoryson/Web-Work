@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags comment -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Search Page</title>
+  <link rel="icon" image="type/png" href="/assets/images/hungerRush.png" type="image/x-icon">
+
+  <!-- <link rel="stylesheet" href="css/styles.css">-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+
+</head>
+
+<body>
+  <!--Start of Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/views/talkTracks/talkTrack.html">BiteBuddy</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse navbar-items" id="navbarNavDropdown">
+      <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav dropdown-toggle">
+          <li class="nav-item dropdown">
+            <a href="#" id="menu" data-bs-toggle="dropdown" class="nav-link dropdown-toggle">
+              Reports
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="/views/oaiDemo/orderHistory.html">Order History</a></li>
+              <li><a class="dropdown-item" href="/views/oaiDemo/summaryReport.html"> Order Summary Report</a></li>
+          </ul>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/views/oaiDemo/search.html">Search</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Store
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/views/oaiDemo/manageStore.html">Manage Store</a>
+            <a class="dropdown-item" href="/views/oaiDemo/healthDashboard.html">Store Health</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/views/oaiDemo/myProfile.html">My Account</a>
+        </li>
+      </ul>
+      </ul>
+      <div>
+        <ul class=" navbar-nav mr-auto">
+          <form class="form-inline my-2 my-lg-0">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+              </div>
+              <input class="form-control" type="search" placeholder="Customer #" aria-label="Search">
+            </div>
+            <button class="btn btn-dark text-white mr-3" type="button" onclick="openSearchPage()">Search</button>
+          </form>
+          <li class="nav-item">
+            <a class="nav-link" href="/views/oaiDemo/myProfile.html"> <i class="fas fa-user mr-2"></i>BiteBuddy User</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/views/talkTracks/talkTrack.html"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!--End of Navbar-->
+  <!--Page Title -->
+  <div class="container-fluid"
+    style="text-align: center; text-transform: uppercase; font-family: Arial, Helvetica, sans-serif; font-size: large;">
+    Search Stores
+  </div>
+  <!--End of Page Title-->
+  <hr style="background-color: lightgray;">
+  <!--Start of SearchContainer-->
+  <div class="container" style="font-family: Arial, Helvetica, sans-serif;">
+    <br>
+    <div class="row">
+      <!-- First Form group -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <select class="form-control">
+            <option label="Order Type" disabled selected value=""></option>
+            <option value="1">All</option>
+            <option value="2">Text Order</option>
+            <option value="3">Telephone Order</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <div style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: 14px;"><b>From:</b></div>
+          <input type="date" class="form-control" id="fromDate1">
+        </div>
+      </div>
+
+      <!-- Second Form Group -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <select class="form-control">
+            <option label="Select Store" disabled selected value="">Select Store*</option>
+            <option value="1">ALL</option>
+            <option value="2">Bitebuddy Eats - Austin</option>
+            <option value="3">Bitebuddy Eats - Houston</option>
+            <option value="4">Bitebuddy Eats - Dallas</option>
+            <option value="5">Bitebuddy Eats - San Antonio</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <div style="text-align: left; font-family: Arial, Helvetica, sans-serif; font-size: 14px;"><b>To:</b></div>
+          <input type="date" class="form-control" id="toDate2">
+        </div>
+      </div>
+    </div>
+    <!--End of Second Form group-->
+    <!--Input Fields-->
+    <div class="form-group mb-3">
+      <input type="text" class="form-control mr-3" placeholder="Customer Phone" aria-label="Customer Phone"
+        aria-describedby="basic-addon1">
+      <input type="text" class="form-control ml-3" placeholder="Order ID" aria-label="Customer Phone"
+        aria-describedby="basic-addon1">
+    </div>
+    <!--End of Input Fields-->
+    <!--Search button-->
+    <div class="col-md align-content-center text-center mt-5">
+      <button type="button" class="btn btn-primary mr-2" id="searchButton" role="button" onclick="toggleTableDisplay()"
+        title="This button toggles the report displays below">Search</button>
+        <button type="button" class="btn btn-primary ml-2" id="searchButton" role="button" onclick="toggleTableDisplay()"
+        title="This button toggles the report displays below">Reset</button>
+    </div>
+  </div>
+  <!-- End of Search Container-->
+  <hr style="background-color: lightgray;">
+  <br>
+  <!--Start of Table Container-->
+  <div id="tableSummaryReports" class="tableSummaryReports" style="display: none;">
+    <br>
+    <div class="container-fluid pb-5" id="tableBox">
+      <p class="report-title" style="font-family: Arial, Helvetica, sans-serif; letter-spacing: 1px;">
+        <b>ORDER DETAILS</b>
+      </p>
+      <div class="table-responsive" id="tableDisplay">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>ROW #</th>
+              <th>RESTAURANT NAME</th>
+              <th>POS ID</th>
+              <th>TYPE</th>
+              <th>DATE</th>
+              <th>TIME</th>
+              <th>ORDER ID</th>
+              <th>ORDER COUNT</th>
+              <th>METHOD</th>
+              <th>PAYMENT METHOD</th>
+              <th>COUPON APPLIED</th>
+              <th>GRAND TOTAL</th>
+              <th>ETA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td>Bitebuddy EATS - AUSTIN</td>
+              <td>POS-1</td>
+              <td>TEXT</td>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td class="timeCell" onload="updateTimeCells(this)"></td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">5ACQYC</a></td>
+              <td>*</td>
+              <td>PICKUP</td>
+              <td>CREDIT CARD</td>
+              <td>NO</td>
+              <td>$70.15</td>
+              <td>30 MIN</td>
+            </tr>
+            <td><b>2</b></td>
+            <td>Bitebuddy EATS - HOUSTON</td>
+            <td>POS-2</td>
+            <td>PHONE</td>
+            <td class="dateCell" onload="updateDateCells(this)"></td>
+            <td class="timeCell" onload="updateTimeCells(this)"></td>
+            <td><a href="#" data-toggle="modal" data-target="#textModal">4GMK6J</a></td>
+            <td>*</td>
+            <td>PICKUP</td>
+            <td>CASH</td>
+            <td>YES</td>
+            <td>$10.15</td>
+            <td>25-30 MIN</td>
+            </tr>
+            <tr>
+              <td><b>3</b></td>
+              <td>Bitebuddy EATS - DALLAS</td>
+              <td>POS-1</td>
+              <td>TEXT</td>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td class="timeCell" onload="updateTimeCells(this)"></td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">5ACQYC</a></td>
+              <td>*</td>
+              <td>PICKUP</td>
+              <td>CREDIT CARD</td>
+              <td>NO</td>
+              <td>$20.45</td>
+              <td>10 MIN</td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td>Bitebuddy EATS - SAN ANTONIO</td>
+              <td>POS-2</td>
+              <td>PHONE</td>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td class="timeCell" onload="updateTimeCells(this)"></td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">4GMK6J</a></td>
+              <td>*</td>
+              <td>PICKUP</td>
+              <td>CASH</td>
+              <td>YES</td>
+              <td>$30.15</td>
+              <td>15-20 MIN</td>
+            </tr>
+            <tr>
+              <td><b>5</b></td>
+              <td>Bitebuddy EATS - AUSTIN</td>
+              <td>POS-1</td>
+              <td>TEXT</td>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td class="timeCell" onload="updateTimeCells(this)"></td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">5ACQYC</a></td>
+              <td>*</td>
+              <td>PICKUP</td>
+              <td>CREDIT CARD</td>
+              <td>NO</td>
+              <td>$40.15</td>
+              <td>30 MIN</td>
+            </tr>
+            <tr>
+              <td><b>6</b></td>
+              <td>Bitebuddy EATS - HOUSTON</td>
+              <td>POS-2</td>
+              <td>TEXT</td>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td class="timeCell" onload="updateTimeCells(this)"></td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">4GMK6J</a></td>
+              <td>*</td>
+              <td>PICKUP</td>
+              <td>CASH</td>
+              <td>YES</td>
+              <td>$50.15</td>
+              <td>25-30 MIN</td>
+            </tr>
+            <tr>
+              <td><b>7</b></td>
+              <td>Bitebuddy EATS - DALLAS</td>
+              <td>POS-1</td>
+              <td>PHONE</td>
+              <td class="dateCell" onload="updateDateCells(this)"></td>
+              <td class="timeCell" onload="updateTimeCells(this)"></td>
+              <td><a href="#" data-toggle="modal" data-target="#textModal">5ACQYC</a></td>
+              <td>*</td>
+              <td>PICKUP</td>
+              <td>CREDIT CARD</td>
+              <td>NO</td>
+              <td>$60.00</td>
+              <td>10 MIN</td>
+            </tr>
+
+          </tbody>
+
+      </div>
+    </div>
+  </div> <!--End of Table Container-->
+
+
+  <!-- The Modal for Text Orders -->
+  <div class="modal" id="textModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header text-center" style="background-color: lightgray;">
+          <h3 class="modal-title w-100">OrderAI Text & Call</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body shadow">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <div class="row pt-3">
+                  <div class="col-8 col-sm-6">
+                    <img src="/assets/images/oaiTxtMsg.jpg" alt="oaiTxtMsg" class="img-fluid">
+                  </div>
+                  <div class="col-8 col-sm-6 text-left border h-50 modalBodyRight mx-auto mt-5">
+                    <div>
+                      <h3 style="text-align: center;">Order Details</h3>
+                    </div>
+                    <br>
+                    <p><b>Customer No:</b> (832)-303-3345</p>
+                    <p><b>Restaurant No:</b> (832)-303-3345</p>
+                    <p><b>Order ID:</b> 4GMK6J</p>
+                    <p><b>Delivery Method:</b> Pick Up</p>
+                    <p><b>Toast ID:</b> 15</p>
+                    <p><b>Toast ETA:</b> 30 Min.</p>
+                    <p><b>Savings:</b> $3.09</p>
+                    <p><b>Total:</b> $70.15</p>
+                    <p><b>Tip:</b> $4.45</p>
+                    <br>
+                    <p>
+                    <h3 style="text-align: center;">Call Recording</h3>
+                    <audio controls style="display: block; margin: auto;">
+                      <source src="/assets/audio/HH_Upsell.mp3" type="audio/mpeg">
+                      Your browser does not support the audio element.
+                    </audio>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer Code Use on every page  style="border-top: 1px solid lightgray; background: white;-->
+  <footer id="footer" class="footer">
+    <div class="footer-left">
+      <p class="footer-text">© 2023 OrderAI. All rights reserved.</p>
+    </div>
+    <div class="footer-right">
+      <p class="footer-text">Terms of Service | Privacy Policy | Cookie Policy</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!--The main.js file must load last-->
+  <script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

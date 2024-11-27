@@ -1,0 +1,193 @@
+
+.navbar {
+    background-color: black;
+    margin: 0px 0px 20px;
+    padding: 5px 10px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+  }
+  
+  @media (max-width: 1000px) {
+    .navbar {
+      background-color: black;
+      margin: 0px 0px 20px;
+      padding: 5px 10px;
+      font-size: 17px;
+      font-family: Arial, Helvetica, sans-serif;
+      border-radius: 0;
+    }
+  }
+  
+    /* Adjust this value as per your design requirements */
+
+.navbar-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* Aligns content to both ends */
+}
+
+/* Making navbar items font white */
+.nav-link {
+    color: white !important;
+}
+
+/* Hover effect for the main dropdown */
+.nav-item.dropdown:hover>.dropdown-menu {
+    display: block;
+}
+
+.nav-item.dropdown:hover>.dropdown-menu .nav-link:hover {
+    color: white !important;
+}
+
+
+/* Hover effect for the secondary dropdown */
+.dropdown-menu>li:hover>.dropdown-menu {
+    display: block;
+}
+
+/* Positioning the secondary dropdown to the right */
+.dropdown-menu .dropdown-menu {
+    left: 100%;
+    top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+} 
+
+
+/* Darkening the hover effect for all dropdown items */
+.navbar .dropdown-menu>a:hover,
+.navbar .dropdown-menu>li:hover>a.dropdown-item,
+.navbar .dropdown-menu .dropdown-menu>li:hover>a.dropdown-item,
+.navbar .dropdown-menu .dropdown-menu .dropdown-menu>li:hover>a.dropdown-item {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+
+.navbar .nav-item .nav-link {
+    padding: 10px 15px;
+    /* 10px vertical padding and 15px horizontal padding */
+} 
+
+.footer {
+    border-top: 1px solid lightgray;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    margin-top: 100px;
+    width: 100%;
+}
+
+.footer .footer-text {
+    color: grey;
+    font-size: 15px;
+    margin: 0 10px;
+}
+
+
+.footer-left {
+    float: left;
+    font-size: 15px;
+    color: grey;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    margin-left: 30px;
+    margin-top: 5px;
+    margin: 0 10px;
+}
+
+.footer-right {
+    float: right;
+    font-size: 15px;
+    color: grey;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    margin-right: 30px;
+    margin-top: 5px;
+    margin: 0 10px;
+}
+
+.button-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    /* Ensures the div takes up the full width of its parent */
+    padding: 20px 0;
+}
+
+/* Fomatting for table report display */
+#tableBox {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form group formatting */
+.form-group {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 10px;
+
+}
+
+.flex-container>input {
+    flex: 1;
+}
+#searchButton {
+    background-color: black;
+}
+
+
+#tableDisplay {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-align: center;
+}
+
+.modal-body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.modalBodyRight {
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+/* Fomatting for the datepicker add
+.datepicker {
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    border: 1px solid #000000;
+  }
+*/
+
+.weclome-text {
+    height: 500px;
+    width: 33%;
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+}
+#profile-link   {
+font-weight: bold;
+border-style: double;
+
+}
+
+#profileHeader {
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}

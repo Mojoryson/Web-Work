@@ -1,0 +1,106 @@
+/* Talk Track  CSS file */
+@media (max-width: 767px) {
+    .heroImage {
+      display: none;
+    }
+  }
+  
+
+body {
+    display: block;
+    content: '';
+    height: 60px;
+    background-image: linear-gradient(to right, blue 30%, rgb(45, 15, 85) 60%, rgb(80, 28, 149) 100%);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: hsl(229, 48%, 95%)
+}
+
+.navbar {
+    background-image: linear-gradient(to right, blue 30%, rgb(45, 15, 85) 60%, rgb(80, 28, 149) 100%);
+    border: 2px solid rgb(45, 15, 85);
+}
+
+#heroBanner {
+    background-image: linear-gradient(to right, blue 30%, rgb(45, 15, 85) 60%, rgb(80, 28, 149) 100%);
+    padding-top: 100px;
+    position: relative;
+}
+
+.headline {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: space-around;
+}
+
+.heroText {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+}
+.heroImage img {
+    border-radius: 50%;
+}
+
+#resources {
+    background-color: rgb(26, 20, 117);
+    margin-top: 0;
+    position: relative;
+}
+
+.accordion-button {
+    font-weight: bold;
+}
+
+ul li a {
+    text-decoration: none;
+    ;
+}
+
+
+.resourceCards {
+
+    background-color: rgb(9, 23, 57);
+
+    color: white;
+}
+
+.resourceCards li {
+    background-color: rgb(9, 23, 57);
+}
+
+.resourceCards li a {
+    color: white;
+}
+
+#demoStories .accordian-item{
+    background-color: rgb(9, 23, 57);
+    color: white;
+    border: 1px solid white;
+}
+
+#demoStories {
+    border: 2px solid white; /* Adjust thickness and color */
+    border-radius: 8px; /* Optional: Rounds the corners */
+    padding: 15px; /* Optional: Adds space inside the border */
+    background-color: rgb(9, 23, 57); /* Optional: Set a background */
+}
+
+.demo-container {
+    border: 2px solid white; /* Add a white border */
+    border-radius: 8px; /* Round the corners */
+    padding: 15px; /* Internal spacing */
+    background-color: rgb(9, 23, 57); /* Set a custom background color */
+    margin: 20px auto; /* Add spacing and center */
+    max-width: 800px; /* Optional: Restrict the width for a cleaner design */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+}

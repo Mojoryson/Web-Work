@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Manage Store</title>
+  <link rel="icon" image="type/png" href="/assets/images/hungerRush.png" type="image/x-icon">
+
+  <!-- <link rel="stylesheet" href="css/styles.css">-->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <style>
+    * {
+      font-family: Arial, Helvetica, sans-serif;
+      box-sizing: border-box;
+      border-width: medium;
+      border-radius: 10px;
+      border-color: rgb(223, 221, 221);
+    }
+
+    #profile-link a {
+      color: black;
+      text-decoration: none;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <!--Start of Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/views/talkTracks/talkTrack.html">OrderAI</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse navbar-items" id="navbarNavDropdown">
+      <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav dropdown-toggle">
+          <li class="nav-item dropdown">
+            <a href="#" id="menu" data-bs-toggle="dropdown" class="nav-link dropdown-toggle">
+              Reports
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="/views/oaiDemo/orderHistory.html">Order History</a></li>
+              <li><a class="dropdown-item" href="/views/oaiDemo/summaryReport.html"> Order Summary Report</a></li>
+          </ul>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/views/oaiDemo/search.html">Search</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Store
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/views/oaiDemo/manageStore.html">Manage Store</a>
+            <a class="dropdown-item" href="/views/oaiDemo/healthDashboard.html">Store Health</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/views/oaiDemo/myProfile.html">My Account</a>
+        </li>
+      </ul>
+      </ul>
+      <div>
+        <ul class=" navbar-nav mr-auto">
+          <form class="form-inline my-2 my-lg-0">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+              </div>
+              <input class="form-control" type="search" placeholder="Customer #" aria-label="Search">
+            </div>
+            <button class="btn btn-dark text-white mr-3" type="button" onclick="openSearchPage()">Search</button>
+          </form>
+          <li class="nav-item">
+            <a class="nav-link" href="/views/oaiDemo/myProfile.html"> <i class="fas fa-user mr-2"></i>Order AI User</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/views/talkTracks/talkTrack.html"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!--End of Navbar-->
+  <!--Page Title -->
+  <div class="container-fluid text-center pt-2 text-muted" id="profileHeader">
+    <p>My Profile</p>
+  </div>
+  <hr style="background-color: lightgray;">
+  <div class="container-fluid">
+    <div class="row text-muted">
+      <div class="col-4 pt-3 shadow" style="border-style: double;">
+        <div class="welcome-text">
+          <i class="fa fa-user-plus fa-xl p-2" style="color: #000005;"></i>
+
+          <span class="welcome-name"><strong>Welcome: BiteBuddy</strong></span>
+        </div>
+      </div>
+      <div class="col-8 text-center p-2 shadow" style="border-style: double;">
+        <p class="pt-2" style="font-size: 16px;"><strong>STORE MANGEMENT</strong></p>
+      </div>
+    </div>
+    <div class="row pt-2">
+      <div class="col-4 p-4 shadow" id="profile-link">
+        <div><i class="fa fa-user p-2"></i><a href="#">Profile</a><i class="fa-solid fa-caret-right pl-3"></i></div>
+        <div><i class="fa-solid fa-lock-open p-2"></i><a href="#">Password Manager</a></div>
+        <div><i class="fa-solid fa-cart-shopping p-2"></i><a href="#">Assigned Stores</a></div>
+        <div><i class="fa-solid fa-list-check p-2"></i><a href="#">Store Management</a></div>
+      </div>
+      <div class="col-8 info p-4" style="border-style: double;">
+        <div class="container-fluid m-auto p-2" style="display: flex; justify-content: space-evenly;">
+          <div class="row">
+            <div class="form-group pr-3">
+              <select name="selectBrand" id="" class="form-control">
+                <option label="Select Brand" disabled selected value=""></option>
+                <option value="1">Bread Meats Bread - Corporate</option>
+                <option value="2">Bread Meats Bread - Franchise</option>
+              </select>
+            </div>
+            <div class="form-group pr-3">
+              <select name="selectStore" id="" class="form-control">
+                <option label="Select Store" disabled selected value=""></option>
+                <option value="1">Bread Meats Bread - Austin</option>
+                <option value="2">Bread Meats Bread - Houston</option>
+                <option value="3">Bread Meats Bread - San Antonio</option>
+                <option value="4">Bread Meats Bread - Dallas</option>
+                <option value="5">Bread Meats Bread - El Paso</option>
+              </select>
+            </div>
+            <span>
+              <button type="button" class="btn btn-secondary">Search</button>
+            </span>
+          </div>
+        </div>
+        <div class="container-fluid shadow">
+          <img src="/assets/images/manageStore.jpg" class="img-fluid" alt="">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer Code Use on every page  style="border-top: 1px solid lightgray; background: white;-->
+  <footer id="footer" class="footer">
+    <div class="footer-left">
+      <p class="footer-text">© 2023 OrderAI. All rights reserved.</p>
+    </div>
+    <div class="footer-right">
+      <p class="footer-text">Terms of Service | Privacy Policy | Cookie Policy</p>
+    </div>
+  </footer>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!--The main.js file must load last-->
+<script src="/assets/js/main.js"></script>
+
+</html>
